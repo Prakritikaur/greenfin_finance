@@ -1,133 +1,132 @@
 import 'package:flutter/material.dart';
+import 'package:update_greenfin/screens/notificationsettingscreen.dart';
 
-class homescreen extends StatefulWidget {
-  const homescreen({super.key});
-
-  @override
-  State<homescreen> createState() => _homescreenState();
-}
-
-class _homescreenState extends State<homescreen> {
+class homeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF084427),
-      body: Column(
-        children: [
-          // Top Section
-          Flexible(
-            flex: 4,
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                vertical: 0,
-                horizontal: 40,
-              ),
-              child: Center(
-                child: RichText(
-                  textAlign: TextAlign.center,
-                  text: const TextSpan(
-                    children: [
-                      TextSpan(
-                        text: 'Welcome User',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 45,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      TextSpan(
-                        text: '\nMotivational tag line from API',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
+      appBar: AppBar(
+        backgroundColor: Color(0xFF084427),
+        iconTheme: IconThemeData(color: Colors.white),
+        title: Text('Greenfin', style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),
+        centerTitle: true,
+        actions: [
+          IconButton(onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (e)=>notificationsettingscreen()));
+          }, icon: Icon(Icons.notifications_active_outlined)),
+        ],
 
-          // Bottom Section
-          Flexible(
-            flex: 5,
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40),
-                  topRight: Radius.circular(40),
-                ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Greeting
+            Text(
+              'Hello, User!',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Color(0xFF004D40)),
+            ),
+            SizedBox(height: 10),
+
+            // Green Box: Total Balance & Expenses
+            Container(
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Color(0xFF084427),
+                borderRadius: BorderRadius.circular(12),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Your Summary",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    const Text(
-                      "Here is some sample text describing your progress, "
-                          "recent achievements, or personalized suggestions.",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          children: [
-                            Icon(Icons.arrow_upward, color: Colors.green, size: 40),
-                            Text("Growth"),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Icon(Icons.arrow_downward, color: Colors.red, size: 40),
-                            Text("Decline"),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const Spacer(),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Add navigation or functionality here
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF084427),
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 12,
-                          horizontal: 24,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                      child: const Text(
-                        "Take Action",
-                        style: TextStyle(fontSize: 16, color: Colors.white),
-                      ),
-                    ),
-                  ],
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Total Balance: ₹50,000',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    'Total Expense: ₹10,000',
+                    style: TextStyle(fontSize: 16, color: Colors.white70),
+                  ),
+                ],
               ),
             ),
-          ),
+            SizedBox(height: 20),
+
+            // Scrollable Daily, Weekly, Monthly Overview
+            Text(
+              'Spending Summary',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF004D40)),
+            ),
+            SizedBox(height: 10),
+            Container(
+              height: 120,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  _buildSummaryCard('Daily', '₹500'),
+                  _buildSummaryCard('Weekly', '₹3,500'),
+                  _buildSummaryCard('Monthly', '₹15,000'),
+                ],
+              ),
+            ),
+            SizedBox(height: 20),
+
+            // Transaction History
+            Text(
+              'Transaction History',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF004D40)),
+            ),
+            SizedBox(height: 10),
+            Expanded(
+              child: ListView(
+                children: [
+                  _buildTransactionItem('Groceries', '₹500', 'Jan 30'),
+                  _buildTransactionItem('Dining Out', '₹1,200', 'Jan 29'),
+                  _buildTransactionItem('Transport', '₹300', 'Jan 28'),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSummaryCard(String title, String amount) {
+    return Container(
+      width: 120,
+      margin: EdgeInsets.only(right: 10),
+      padding: EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(color: Colors.grey.shade300, blurRadius: 5, spreadRadius: 1),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title, style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF004D40))),
+          SizedBox(height: 5),
+          Text(amount, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF084427))),
         ],
       ),
     );
-
+  }
+/////////////// Transaction history k liye/////////////////////////////
+  Widget _buildTransactionItem(String name, String amount, String date) {
+    return Card(
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: ListTile(
+        title: Text(name, style: TextStyle(color: Color(0xFF004D40))),
+        subtitle: Text(date, style: TextStyle(color: Colors.grey.shade600)),
+        trailing: Text(amount, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.redAccent)),
+      ),
+    );
   }
 }

@@ -52,7 +52,7 @@ class _accountscreenState extends State<accountscreen> {
                 const Icon(Icons.notifications_none ),
                 const Text('Notification Settings'),
                 IconButton(onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (e)=>const notificationsettingscreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (e)=> notificationsettingscreen()));
                 }, icon: const Icon(Icons.arrow_forward_ios))
               ],
             ),

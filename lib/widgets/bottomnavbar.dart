@@ -32,7 +32,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
             ),
           ),
           body: TabBarView(children: [
-             const homescreen(),
+             homeScreen(),
              analyticsscreen(),
              const transactionscreen(),
              const profilescreen(),

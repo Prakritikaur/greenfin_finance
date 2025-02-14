@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:update_greenfin/screens/notificationsettingscreen.dart';
 
-class editscreen extends StatelessWidget {
+class ChangePasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
-        title: Text('Edit Profile',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
         centerTitle: true,
+        title: Text('Change Password'),
         backgroundColor: Colors.green[700],
         actions: [
           IconButton(onPressed: (){
@@ -19,43 +19,28 @@ class editscreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
-              child: Stack(
-                children: [
-                  CircleAvatar(
-                    radius: 50,
-                    backgroundImage: AssetImage('assets/profile_placeholder.png'),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: IconButton(
-                      icon: Icon(Icons.edit, color: Colors.green),
-                      onPressed: () {}, // Add image picker functionality
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 20),
             TextField(
+              obscureText: true,
               decoration: InputDecoration(
-                labelText: 'Full Name',
+                labelText: 'Current Password',
                 border: OutlineInputBorder(),
               ),
             ),
             SizedBox(height: 10),
             TextField(
+              obscureText: true,
               decoration: InputDecoration(
-                labelText: 'Email',
+                labelText: 'New Password',
                 border: OutlineInputBorder(),
               ),
             ),
             SizedBox(height: 10),
             TextField(
+              obscureText: true,
               decoration: InputDecoration(
-                labelText: 'Phone Number',
+                labelText: 'Confirm New Password',
                 border: OutlineInputBorder(),
               ),
             ),
@@ -66,9 +51,9 @@ class editscreen extends StatelessWidget {
                 minimumSize: Size(double.infinity, 50),
               ),
               onPressed: () {
-                // Add save functionality
+                // Add password change functionality
               },
-              child: Text('Save Changes',style: TextStyle(color: Colors.white),),
+              child: Text('Update Password',style: TextStyle(color: Colors.white),),
             ),
           ],
         ),

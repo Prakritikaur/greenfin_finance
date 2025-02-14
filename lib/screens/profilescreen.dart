@@ -25,7 +25,7 @@ class _profilescreenState extends State<profilescreen> {
               child: Text(
                 'Profile',
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 50,
                   fontWeight: FontWeight.bold,
                 ),
@@ -58,7 +58,7 @@ class _profilescreenState extends State<profilescreen> {
                     children: [
                       InkWell(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (e)=>const editprofilescreen()));
+                          Navigator.push(context, MaterialPageRoute(builder: (e)=> editscreen()));
                         },
                         child: const Row(
                           children: [
@@ -85,7 +85,7 @@ class _profilescreenState extends State<profilescreen> {
                       ),
                       InkWell(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (e)=>const securityscreen()));
+                          Navigator.push(context, MaterialPageRoute(builder: (e)=>  securityscreen()));
                         },
                         child: const Row(
                           children: [
