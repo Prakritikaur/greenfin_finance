@@ -18,6 +18,8 @@ class signinscreen extends StatefulWidget {
 class _signinscreenState extends State<signinscreen> {
   final _formSignInKey= GlobalKey<FormState>();
   bool rememberPassword = true;
+  var email=TextEditingController();
+  var password=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return customscaffold(
@@ -58,6 +60,7 @@ class _signinscreenState extends State<signinscreen> {
                         }
                         return null;
                       },
+                      controller: email,
                       decoration: InputDecoration(
                         label: const Text('Email'),
                         hintText:'Enter  email',
@@ -85,6 +88,7 @@ class _signinscreenState extends State<signinscreen> {
                         }
                         return null;
                       },
+                      controller: password,
                       decoration: InputDecoration(
                         label: const Text('Password'),
                         hintText:'Enter  Password',
